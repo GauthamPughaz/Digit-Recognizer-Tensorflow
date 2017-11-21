@@ -3,6 +3,6 @@ A simple digit recognizer(MNIST) which predicts digits in images using tensorflo
 
 Number of hidden layers used = 3
 
-Number of neurons used per hidden layer = 650
+Number of neurons used per hidden layer = 600
 
-Accuracy achieved by the ANN model = 95.5%
+Accuracy achieved by the ANN model = 96%
