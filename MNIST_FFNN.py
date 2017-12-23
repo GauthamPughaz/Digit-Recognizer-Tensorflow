@@ -13,6 +13,7 @@ mnist = input_data.read_data_sets('./data/', one_hot=True) # Using one_hot repre
 
 
 pixels = 784 # 28 X 28 pixels
+hm_epochs = 10 # Number of epochs used.
 n_nodes_HL1 = 600
 n_nodes_HL2 = 600
 n_nodes_HL3 = 600
@@ -59,8 +60,6 @@ def train_neural_network(x, pixels):
     cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(prediction, y))
     optimizer = tf.train.AdamOptimizer().minimize(cost)
 
-    hm_epochs = 10 # Number of epochs used.
-
     with tf.Session() as sess:
         sess.run(tf.initialize_all_variables())
 
@@ -71,9 +70,6 @@ def train_neural_network(x, pixels):
                 _, c = sess.run([optimizer, cost], feed_dict={x: epoch_x, y: epoch_y})
                 epoch_cost += c
             print('Epoch', epoch + 1, 'completed of', hm_epochs, 'and epoch loss:', epoch_cost)
-        
-        saver = tf.train.Saver()
-        saver.save(sess, 'predictor') # Saving the model.
 
         correct = tf.equal(tf.argmax(prediction, 1), tf.argmax(y, 1))
         accuracy = tf.reduce_mean(tf.cast(correct, 'float'))
